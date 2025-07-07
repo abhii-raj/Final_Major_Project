@@ -1,41 +1,48 @@
 // /frontend/src/pages/About.jsx
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaBrain, FaChartBar, FaUsers, FaShieldAlt } from 'react-icons/fa';
+import api from '../services/api';          
 
-const stats = [
-  { label: 'Jobs analysed', value: '10,473' },
-  { label: 'Average accuracy', value: '92%' },
-  { label: 'Active users', value: '3,028' },
-];
-
+/* static feature / FAQ data */
 const features = [
-  { icon: FaBrain,  title: 'AI‑powered',    desc: 'Transformer‑based model trained on 50k postings.' },
-  { icon: FaChartBar,title: 'Instant stats',desc: 'Pie‑charts, trend lines and per‑user history.' },
+  { icon: FaBrain,  title: 'AI-powered',    desc: 'Transformer-based model trained on 18k postings.' },
+  { icon: FaChartBar,title: 'Instant stats',desc: 'Pie-charts, trend lines and per-user history.' },
   { icon: FaUsers,  title: 'Crowd reviews', desc: 'Share ★ ratings & comments with the community.' },
   { icon: FaShieldAlt,title: 'Admin tools', desc: 'Full CRUD and health checks for moderators.' },
 ];
 
 const faqs = [
-  { q: 'How is accuracy measured?', a: 'We use a held‑out test set of 5 000 labelled postings and compute precision + recall.' },
+  { q: 'How is accuracy measured?', a: 'We use a held-out test set of 18000 labelled postings and compute precision + recall.' },
   { q: 'What data do you store?',   a: 'Only the URL, prediction result and optional review—never resumes or personal data.' },
-  { q: 'Is the service free?',      a: 'Yes for individual users. Contact us for bulk or enterprise plans.' },
-  { q: 'How often is the model retrained?', a: 'Monthly, incorporating newly‑labelled data and feedback.' },
+  { q: 'Is the service free?',      a: 'Yes for individual users' },
+  { q: 'How often is the model retrained?', a: 'Monthly, incorporating newly-labelled data and feedback.' },
 ];
 
 const About = () => {
   const [open, setOpen] = useState(null);
+  const [counts, setCounts] = useState({ submissions: '…', users: '…', reviews: '…' });
+
+  
+  useEffect(() => {
+    api.get('/stats').then(({ data }) => setCounts(data)).catch(() => {});
+  }, []);
+
+  const stats = [
+    { label: 'Jobs analysed',   value: counts.submissions },
+    { label: 'Total reviews',   value: counts.reviews },
+    { label: 'Active users',    value: counts.users },
+  ];
 
   return (
     <main className="max-w-6xl mx-auto px-4 py-16 space-y-20">
-
       {/* hero */}
       <section className="text-center space-y-6">
         <h1 className="text-4xl md:text-5xl font-extrabold dark:text-white">
           Our Mission: <span className="text-blue-600 dark:text-blue-400">Stop Job Scams</span> Before They Spread
         </h1>
         <p className="text-lg max-w-2xl mx-auto text-gray-700 dark:text-gray-300">
-          Transit Help empowers job‑seekers to instantly verify postings using state‑of‑the‑art AI and
+          Transit Help empowers job-seekers to instantly verify postings using state-of-the-art AI and
           transparent community reviews.
         </p>
         <img
@@ -45,7 +52,7 @@ const About = () => {
         />
       </section>
 
-      {/* stats */}
+      {/* live stats */}
       <section className="grid sm:grid-cols-3 gap-6 text-center">
         {stats.map((s) => (
           <div key={s.label} className="bg-white dark:bg-gray-800 rounded-2xl shadow p-6">
@@ -59,7 +66,7 @@ const About = () => {
       <section className="space-y-6">
         <h2 className="text-2xl font-bold mb-4 dark:text-white text-center">How It Works</h2>
         <div className="grid md:grid-cols-3 gap-8">
-          {['Paste URL', 'AI scans', 'Instant verdict'].map((step, i) => (
+          {['Paste URL', 'ML & NLP model', 'Instant verdict'].map((step, i) => (
             <div key={step} className="bg-white dark:bg-gray-800 rounded-2xl shadow p-8 text-center">
               <p className="text-5xl font-extrabold text-blue-600 dark:text-blue-400 mb-2">{i + 1}</p>
               <p className="text-lg font-semibold dark:text-white">{step}</p>
@@ -98,7 +105,9 @@ const About = () => {
                 <p className="font-medium dark:text-white">{q}</p>
                 <span>{open === idx ? '−' : '+'}</span>
               </div>
-              {open === idx && <p className="px-4 pb-4 text-gray-500 dark:text-gray-400 text-sm">{a}</p>}
+              {open === idx && (
+                <p className="px-4 pb-4 text-gray-500 dark:text-gray-400 text-sm">{a}</p>
+              )}
             </div>
           ))}
         </div>

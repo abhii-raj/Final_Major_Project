@@ -6,6 +6,8 @@ import authRoutes from './routes/auth.js';
 import submissionRoutes from './routes/submissions.js';
 import adminRoutes from './routes/admin.js';
 import reviewRoutes from './routes/reviews.js';
+import statsRouter from './routes/stats.js';
+
 
 dotenv.config();
 connectDB();
@@ -15,6 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (req, res) => res.send('API is running'));
+app.use('/api/stats', statsRouter);
 
 app.use('/api/auth', authRoutes);
 app.use('/api/submissions', submissionRoutes);

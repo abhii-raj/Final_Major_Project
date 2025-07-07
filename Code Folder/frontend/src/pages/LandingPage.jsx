@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
+import Img from './assets/image.png';
 
 const imgs = [
-  'https://images.unsplash.com/photo-1521790797524-b2497295b8b4',
+  Img ,
   'https://images.unsplash.com/photo-1504384308090-c894fdcc538d',
   'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2',
 ];

@@ -6,7 +6,7 @@ const Footer = () => (
       <p className="text-gray-500">© {new Date().getFullYear()} Transit Help. All rights reserved.</p>
 
       <a
-        href="https://github.com/your‑repo"   // TODO: replace with real repo
+        href="https://github.com/Ayushigupta7453/Final_Major_Project"   
         target="_blank"
         rel="noopener noreferrer"
         className="text-gray-600 hover:text-gray-800 dark:text-gray-300 dark:hover:text-white"
