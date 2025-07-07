@@ -1,4 +1,4 @@
-numpy==1.22
+numpy
 scikit-learn==1.5.2 # same major.minor as the model
 Flask>=2.3
 flask-cors>=4.0
