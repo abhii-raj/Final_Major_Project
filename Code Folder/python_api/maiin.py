@@ -36,7 +36,12 @@ def _looks_like_job_board(url: str) -> bool:
 
 
 app = Flask(__name__)
-CORS(app)
+
+from flask_cors import CORS
+
+
+CORS(app, origins=["https://transit-helps.onrender.com"])
+
 
 base = os.path.dirname(__file__)
 vectorizer = joblib.load(os.path.join(base, "vectorizer.pkl"))
