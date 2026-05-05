@@ -35,10 +35,10 @@ const TableauEmbed = () => {
           <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
           <param name="embed_code_version" value="3" />
           <param name="site_root" value="" />
-          <param name="name" value="major_project_17456906492150/Dashboard1" />
+          <param name="name" value="Final_Project_Updated/Dashboard1" />
           <param name="tabs" value="no" />
           <param name="toolbar" value="yes" />
-          <param name="static_image" value="https://public.tableau.com/static/images/ma/major_project_17456906492150/Dashboard1/1.png" />
+          <param name="static_image" value="https://public.tableau.com/static/images/Fi/Final_Project_Updated/Dashboard1/1.png" />
           <param name="animate_transition" value="yes" />
           <param name="display_static_image" value="yes" />
           <param name="display_spinner" value="yes" />
